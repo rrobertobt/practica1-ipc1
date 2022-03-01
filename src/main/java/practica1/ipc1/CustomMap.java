@@ -3,12 +3,15 @@ import java.util.Scanner;
 
 
 public class CustomMap {
+
+	// VARS GLOBALES
 	public static Scanner input = new Scanner(System.in);
 	static int columns;
 	static int rows;
 	static int reqGold;
 	static String[][] generatedMap;
 
+	// CONSTRUCTOR
 	CustomMap(int rows, int columns, int reqGold) {
 		this.rows = rows;
 		this.columns = columns;
@@ -17,6 +20,7 @@ public class CustomMap {
 		generatedMap = new String[rows][columns];
 	}
 
+	// FUNCION PARA PEDIR NUMERO MAYOR QUE CERO
 	public static int askForNumberGZ(String message){
 		int enteredNumber = 0;
 		boolean inputError = false;
@@ -45,6 +49,7 @@ public class CustomMap {
 		return enteredNumber;
 	}
 
+	// FUNCION PARA PEDIR NUMEROS POSITIVOS
 	public static int askForNumber(String message){
 		int enteredNumber = 0;
 		boolean inputError = false;
@@ -73,6 +78,7 @@ public class CustomMap {
 		return enteredNumber;
 	}
 
+	// FUNCION PARA LLENAR EL MAPA POR EL USUARIO
 	public void FillMap() {
 
 		System.out.println("Comenzando llenado de mapa...");
@@ -125,6 +131,8 @@ public class CustomMap {
 		// paredes
 	}
 
+
+	// FUNCION PARA COMPROBAR SI YA SE LLENO LA CASILLA QUE SE ESTÁ INTENTANDO LLENAR
 	private boolean alreadyFilled(String[][] mapToVerify, int row, int column){
 		if ("S".equals(mapToVerify[row][column]) || "G".equals(mapToVerify[row][column]) || "#".equals(mapToVerify[row][column]) || "O".equals(mapToVerify[row][column])){
 			return true;
