@@ -10,6 +10,13 @@ public class Main{
 	static String[] mapNamesList = new String[10];
 	static int mapIndex = 1;
 
+	// VARS PARA REPORTES
+	static int timesWon;
+	static int goldAvg;
+	static int movesAvg;
+	// int mapas creados
+
+
 
 	public static void main(String[] args) {
 
@@ -87,14 +94,19 @@ public class Main{
 
 		switch (selection) {
 			case 1 :
-				System.out.println("Jugar");
+				System.out.println("====== Jugar ======");
+				System.out.println("!! Parte sin funcionamiento !!");
 				break;
 			case 2: {
+				if (mapIndex == 10) {
+					System.out.println("Aviso: Ya se ha alcanzado el maximo de mapas creados, no se pueden crear mas");
+					mainMenu();
+				}
 				prepareMapCreation();
 				break;
 			}
 			case 3:
-				System.out.println("reportes");
+				System.out.println("====== Mostrando reportes generales ======");
 				break;
 			case 4:
 				System.out.println("====== Entrando a previsualizador de mapas ======");
@@ -109,11 +121,23 @@ public class Main{
 	}
 	// TEMRINA MENU PRINCIPAL
 
+	// MOSTRAR REPORTES GENERALES
+
+	public static void showStats(){
+
+
+
+	}
+
+	// TERMINA MOSTRAR REPORTES GENERALES
+
+
 
 	// PREVISUALIZADOR DE MAPAS
 	public static void previewMap(String[][][] maps){
 		int selection;
 		int avaliableMaps = 0;
+
 		// obtenemos la cantidad de mapas dispobnibles
 
 		for (int i = 0; i < maps.length; i++) {
@@ -125,13 +149,12 @@ public class Main{
 		}
 
 		do {
+
 			System.out.println("Mapas disponibles:");
 			// listamos los mapas que estan disponibles
 			for (int i = 0; i < maps.length; i++) {
-				if (i==0) {
-					System.out.println("Mapa #"+(i+1)+" (mapa predeterminado)");
-				} else if (maps[i] != null){
-					System.out.println("Mapa #"+(i+1));
+				if (maps[i] != null) {
+					System.out.println("Mapa #"+(i+1)+" Nombre: "+(mapNamesList[i]));
 				} else {
 					break;
 				}
@@ -168,14 +191,28 @@ public class Main{
 		System.out.println("Aviso: Puede crear hasta 9 mapas");
 		System.out.println("Comenzando creación del nuevo mapa:");
 		System.out.println("De que tamaño desea crearlo?");
+
+		// pedimos los parametros del mapa
 		int rows = askForNumberGZ("Filas? > ");
 		int columns = askForNumberGZ("Columnas? > ");
 		int reqGold = askForNumberGZ("Cantidad de oro necesario para salir? > ");
+
+		System.out.print("Nombre? > ");
+		String name = input.next();
+
+		// guardamos el oro requerido y el nombre
 		reqGoldList[mapIndex] = reqGold;
-		CustomMap newMap = new CustomMap(rows, columns, reqGold);
+		mapNamesList[mapIndex] = name;
+
+		// construimos un nuevo mapa con la clase CustomMap
+		CustomMap newMap = new CustomMap(rows, columns, reqGold, name);
+
+		// Lo llenamos por el usuario
 		newMap.FillMap();
-		String[][] createdMap = newMap.generatedMap;
-		maps[mapIndex] = createdMap;
+
+		// Lo guardamos en la lista de mapas
+		maps[mapIndex] = newMap.generatedMap;
+
 		mapIndex += 1;
 
 		// una vez terminada la creacion de un mapa, regresar al menu
