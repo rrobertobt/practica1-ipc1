@@ -113,7 +113,7 @@ public class CustomMap {
 
 		System.out.println("Comenzando llenado de mapa...");
 
-		// comenzamos por las salidas que tendra el mapa y en donde se ubicarán
+		// CASILLAS DE SALIDA
 		System.out.println("Colocando salidas del mapa:");
 		int exitsCount = askForNumberGZ("Cuantas salidas tendra este mapa? > ");
 
@@ -151,6 +151,7 @@ public class CustomMap {
 			} while (!inputCorrect);
 
 		}
+		// TERMINA CASILLAS DE SALIDA
 
 		// mostramos el mapa en su estado actual
 		System.out.println("Mapa actual:");
@@ -164,7 +165,7 @@ public class CustomMap {
 			System.out.println("");
 		}
 
-		// luego preguntamos por las casillas de oro y sus ubicaciones
+		// CASILLAS DE ORO
 		System.out.println("Colocando casillas de oro:");
 
 		boolean goldCountCorrect = false;
@@ -180,6 +181,19 @@ public class CustomMap {
 
 
 		for (int i = 0; i < goldCount; i++) {
+
+			// mostramos el mapa en su estado actual
+			System.out.println("Mapa actual:");
+			for (int k = 0; k < generatedMap.length; k++) {
+				for (int l = 0; l < generatedMap[k].length; l++) {
+					if (generatedMap[k][l] == null) {
+						generatedMap[k][l] = "-";
+					}
+					System.out.print(generatedMap[k][l]+" ");
+				}
+				System.out.println("");
+			}
+
 			System.out.println("Tomando coordenadas de casillas de oro:");
 			System.out.println("Donde se colocara la casilla de oro #" + (i + 1) + "?");
 			int rowGold = 0;
@@ -199,27 +213,26 @@ public class CustomMap {
 			} while (!inputCorrect);
 
 		}
+		// TERMINA CASILLAS DE ORO
 
-		// MOSTRAR ESTADO ACTUAL DEL MAPA
 
-		System.out.println("Mostrando previsualizacion del estado actual del mapa: ");
-
-		for (int i = 0; i < generatedMap.length; i++) {
-			for (int j = 0; j < generatedMap[i].length; j++) {
-				if (generatedMap[i][j] == null) {
-					generatedMap[i][j] = "-";
+		// mostramos el mapa en su estado actual
+		System.out.println("Mapa actual:");
+		for (int k = 0; k < generatedMap.length; k++) {
+			for (int l = 0; l < generatedMap[k].length; l++) {
+				if (generatedMap[k][l] == null) {
+					generatedMap[k][l] = "-";
 				}
-				System.out.print(generatedMap[i][j]+" ");
+				System.out.print(generatedMap[k][l]+" ");
 			}
 			System.out.println("");
 		}
 
-		System.out.println("");
-
-		// paredes
+		// CASILLAS DE PAREDES
 //		System.out.println("Colocando paredes:");
+//
 //		// Calculamos cuantos espacios estan vacios
-//		int leftSpaces = (rows*columns);
+//		int leftSpaces = ((rows*columns) - exitsCount - goldCount);
 //		int goldCount = askForNumberGZ("Cuantas casillas con oro tendra este mapa?");
 //		for (int i = 0; i < goldCount; i++) {
 //			System.out.println("Tomando coordenadas de casillas de oro:");
@@ -239,6 +252,8 @@ public class CustomMap {
 //			} while (!inputCorrect);
 //
 //		}
+
+		// TERMINA CASILLAS DE PAREDES
 
 	}
 

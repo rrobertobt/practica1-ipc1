@@ -10,13 +10,6 @@ public class Main{
 	static String[] mapNamesList = new String[10];
 	static int mapIndex = 1;
 
-	// VARS PARA REPORTES
-	static int timesWon;
-	static int goldAvg;
-	static int movesAvg;
-	// int mapas creados
-
-
 
 	public static void main(String[] args) {
 
@@ -173,8 +166,11 @@ public class Main{
 						}
 						System.out.println("");
 					}
+					System.out.println("\nNombre de este mapa: "+mapNamesList[i]);
+					System.out.println("Oro requerido para salir en este mapa: "+reqGoldList[i]+"\n");
 					break;
 				}
+
 			}
 
 		} while (selection != 0);
