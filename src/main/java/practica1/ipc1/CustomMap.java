@@ -6,6 +6,7 @@ public class CustomMap {
 
 	// VARS GLOBALES
 	public static Scanner input = new Scanner(System.in);
+	static String name;
 	static int columns;
 	static int rows;
 	static int reqGold;
@@ -96,7 +97,9 @@ public class CustomMap {
 
 			do {
 				rowExit = askForNumber("Fila? > ");
+				rowExit -= 1;
 				columnExit = askForNumber("Columna? > ");
+				columnExit -= 1;
 				if(alreadyFilled(generatedMap, rowExit, columnExit)){
 					System.out.println("Error: esa casilla ya esta llena");
 				} else { inputCorrect = true; }
@@ -118,7 +121,9 @@ public class CustomMap {
 
 			do {
 				rowGold = askForNumber("Fila? > ");
+				rowGold -= 1;
 				columnGold = askForNumber("Columna? > ");
+				columnGold -= 1;
 				if(alreadyFilled(generatedMap, rowGold, columnGold)){
 					System.out.println("Error: esa casilla ya esta llena");
 				} else { inputCorrect = true; }
@@ -129,6 +134,29 @@ public class CustomMap {
 		}
 
 		// paredes
+//		System.out.println("Colocando paredes:");
+//		// Calculamos cuantos espacios estan vacios
+//		int leftSpaces = (rows*columns);
+//		int goldCount = askForNumberGZ("Cuantas casillas con oro tendra este mapa?");
+//		for (int i = 0; i < goldCount; i++) {
+//			System.out.println("Tomando coordenadas de casillas de oro:");
+//			System.out.println("Donde se colocara la casilla de oro #" + (i + 1) + "?");
+//			int rowGold = 0;
+//			int columnGold = 0;
+//			boolean inputCorrect = false;
+//
+//			do {
+//				rowGold = askForNumber("Fila? > ");
+//				columnGold = askForNumber("Columna? > ");
+//				if(alreadyFilled(generatedMap, rowGold, columnGold)){
+//					System.out.println("Error: esa casilla ya esta llena");
+//				} else { inputCorrect = true; }
+//
+//				generatedMap[rowGold][columnGold] = "G";
+//			} while (!inputCorrect);
+//
+//		}
+
 	}
 
 

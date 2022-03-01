@@ -7,6 +7,7 @@ public class Main{
 	static Scanner input = new Scanner(System.in);
 	static String[][][] maps;
 	static int[] reqGoldList = new int[10];
+	static String[] mapNamesList = new String[10];
 	static int mapIndex = 1;
 
 
@@ -57,9 +58,9 @@ public class Main{
 		}
 
 		reqGoldList[0] = 15;
+		mapNamesList[0] = "Predeterminado";
 
-
-		// termina: asignación de mapa por defecto como primer mapa en la lista, y oro requerido para mapa por defecto
+		// termina: asignación de mapa por defecto como primer mapa en la lista, oro requerido para mapa por defecto y nombre
 
 		mainMenu();
 
@@ -164,6 +165,7 @@ public class Main{
 	public static void prepareMapCreation(){
 
 		System.out.println("====== Entrando a creador de mapas ======");
+		System.out.println("Aviso: Puede crear hasta 9 mapas");
 		System.out.println("Comenzando creación del nuevo mapa:");
 		System.out.println("De que tamaño desea crearlo?");
 		int rows = askForNumberGZ("Filas? > ");
@@ -172,8 +174,12 @@ public class Main{
 		reqGoldList[mapIndex] = reqGold;
 		CustomMap newMap = new CustomMap(rows, columns, reqGold);
 		newMap.FillMap();
-//		maps[mapIndex] = new String[][];
+		String[][] createdMap = newMap.generatedMap;
+		maps[mapIndex] = createdMap;
 		mapIndex += 1;
+
+		// una vez terminada la creacion de un mapa, regresar al menu
+		mainMenu();
 
 	}
 	// TERMINA PREPARAR CREACION DE MAPAS
