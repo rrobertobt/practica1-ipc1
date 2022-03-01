@@ -3,9 +3,12 @@ import java.util.Scanner;
 
 public class Main{
 
-	public static Scanner input = new Scanner(System.in);
-	public static String[][][] maps;
-	public static int[] reqGold = new int[10];
+	// VARS GLOBALES
+	static Scanner input = new Scanner(System.in);
+	static String[][][] maps;
+	static int[] reqGoldList = new int[10];
+	static int mapIndex = 1;
+
 
 	public static void main(String[] args) {
 
@@ -45,24 +48,6 @@ public class Main{
 				{"#","O","O","O","O","O","G","#","O","O","O","O","#","O","O","O","O","O","O","O","O","O","O","O","O","O","#","O","G","#"},
 				{"#","#","#","#","#","#","#","#","#","#","#","#","#","S","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#"}};
 
-		String[][] mapDefault2 ={{"#","#","#","#","#","#","#","#","S","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#"},
-				{"S","O","O","O","O","O","O","#","O","O","O","O","O","O","O","O","O","#","O","O","O","O","O","O","O","O","#","O","O","S"},
-				{"#","#","#","#","#","#","O","O","#","#","#","O","#","#","#","O","#","O","O","#","#","#","#","#","#","O","O","#","O","#"},
-				{"#","O","O","G","O","#","O","#","G","G","#","O","#","G","#","O","#","G","#","O","#","O","O","O","#","#","O","O","O","#"},
-				{"#","O","#","#","O","#","O","O","O","O","#","G","#","O","#","O","#","#","O","O","#","O","#","O","O","#","O","#","O","#"},
-				{"#","G","#","O","O","#","O","#","#","#","#","#","#","O","#","O","O","O","#","O","#","O","#","#","#","#","O","#","O","#"},
-				{"#","O","#","#","O","O","O","O","O","O","#","O","#","O","O","O","O","O","O","O","O","O","#","O","O","O","O","#","#","#"},
-				{"#","#","O","O","O","#","O","#","O","#","O","O","#","#","O","#","#","O","#","#","#","#","#","O","#","O","#","#","G","#"},
-				{"#","O","O","#","O","#","O","O","O","#","O","#","O","#","O","O","#","O","#","O","O","O","O","O","#","O","O","#","G","#"},
-				{"#","O","#","#","O","#","#","#","O","#","O","#","O","#","#","O","#","O","#","#","#","O","#","#","#","#","G","#","O","#"},
-				{"#","O","O","O","O","#","O","#","O","#","O","#","O","#","O","O","#","O","O","G","#","O","O","#","O","#","O","#","O","#"},
-				{"#","#","#","G","#","O","O","O","O","#","O","#","O","#","#","O","#","#","#","#","#","O","#","o","#","#","O","#","O","#"},
-				{"#","O","O","#","O","O","#","#","#","O","O","#","O","#","O","O","O","O","O","O","O","O","O","O","O","#","O","#","O","#"},
-				{"#","#","O","#","#","O","#","O","O","#","O","#","O","O","O","#","O","#","#","O","#","O","O","#","O","#","O","#","O","#"},
-				{"#","O","O","#","O","O","#","O","#","#","O","#","G","#","O","#","#","O","O","#","O","O","#","O","O","#","O","#","O","#"},
-				{"#","#","#","#","#","#","#","#","#","#","#","#","#","S","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#","#"}};
-
-
 		maps[0] = new String[mapDefault.length][mapDefault.length];
 
 		for (int i = 0; i < mapDefault.length; i++) {
@@ -71,73 +56,16 @@ public class Main{
 			}
 		}
 
-		reqGold[0] = 15;
+		reqGoldList[0] = 15;
 
 
-		// termina: asignación de mapa por defecto como primer mapa en la lista
-
-		// prueba: mapa 2
-
-		maps[1] = new String[mapDefault2.length][mapDefault2.length];
-		for (int i = 0; i < mapDefault2.length; i++) {
-			for (int j = 0; j < mapDefault2.length; j++) {
-				maps[1][i][j] = mapDefault2[i][j];
-			}
-		}
-
-		// termina prueba: mapa 2
-
-		mainMenu();
-
-	}
-	
-	public static void previewMap(String[][][] maps){
-		int selection;
-		int avaliableMaps = 0;
-		// obtenemos la cantidad de mapas dispobnibles
-
-		for (int i = 0; i < maps.length; i++) {
-			if (maps[i] != null) {
-				avaliableMaps = i+1;
-			} else {
-				break;
-			}
-		}
-
-		do {
-			// listamos los mapas que estan disponibles
-			for (int i = 0; i < maps.length; i++) {
-				if (i==0) {
-					System.out.println("Mapa #"+(i+1)+" (mapa predeterminado)");
-				} else if (maps[i] != null){
-					System.out.println("Mapa #"+(i+1));
-				} else {
-					break;
-				}
-			}
-			// pedimos el mapa a mostrar
-			selection = askForNumber("Selecciona un mapa de los " +avaliableMaps+ " disponibles, o escribe 0 para regresar a menu principal\n> ", 0, avaliableMaps);
-
-			// finalmente, mostramos el mapa seleccionado o salimos del previsualizador
-
-			if (selection > 0){
-				for (int i = (selection-1); i < maps.length;) {
-					for (int j = 0; j < maps[i].length; j++) {
-						for (int k = 0; k < maps[i][j].length; k++) {
-							System.out.print(maps[i][j][k]);
-						}
-						System.out.println("");
-					}
-					break;
-				}
-			}
-
-		} while (selection != 0);
+		// termina: asignación de mapa por defecto como primer mapa en la lista, y oro requerido para mapa por defecto
 
 		mainMenu();
 
 	}
 
+	// MENU PRINCIPAL
 	public static void mainMenu() {
 
 		int selection = 0;
@@ -153,7 +81,7 @@ public class Main{
 				5): Salir del juego
 				>\040""";
 
-		selection = askForNumber(mainMenuOptions, 1, 5);
+		selection = askForNumberL(mainMenuOptions, 1, 5);
 
 
 		switch (selection) {
@@ -161,9 +89,7 @@ public class Main{
 				System.out.println("Jugar");
 				break;
 			case 2: {
-				System.out.println("====== Entrando a creador de mapas ======");
-				CustomMap newMap = new CustomMap(5,5,1);
-//				mapa1.generate();
+				prepareMapCreation();
 				break;
 			}
 			case 3:
@@ -180,9 +106,84 @@ public class Main{
 		}
 
 	}
+	// TEMRINA MENU PRINCIPAL
 
 
-	public static int askForNumber(String message, int lMin, int lMax){
+	// PREVISUALIZADOR DE MAPAS
+	public static void previewMap(String[][][] maps){
+		int selection;
+		int avaliableMaps = 0;
+		// obtenemos la cantidad de mapas dispobnibles
+
+		for (int i = 0; i < maps.length; i++) {
+			if (maps[i] != null) {
+				avaliableMaps = i+1;
+			} else {
+				break;
+			}
+		}
+
+		do {
+			System.out.println("Mapas disponibles:");
+			// listamos los mapas que estan disponibles
+			for (int i = 0; i < maps.length; i++) {
+				if (i==0) {
+					System.out.println("Mapa #"+(i+1)+" (mapa predeterminado)");
+				} else if (maps[i] != null){
+					System.out.println("Mapa #"+(i+1));
+				} else {
+					break;
+				}
+			}
+			// pedimos el mapa a mostrar
+			selection = askForNumberL("Selecciona un mapa de los " +avaliableMaps+ " disponibles, o escribe 0 para regresar a menu principal\n> ", 0, avaliableMaps);
+
+			// finalmente, mostramos el mapa seleccionado o salimos del previsualizador
+
+			if (selection > 0){
+				for (int i = (selection-1); i < maps.length;) {
+					System.out.println("Mostrando mapa #"+(i+1));
+					for (int j = 0; j < maps[i].length; j++) {
+						for (int k = 0; k < maps[i][j].length; k++) {
+							System.out.print(maps[i][j][k]+" ");
+						}
+						System.out.println("");
+					}
+					break;
+				}
+			}
+
+		} while (selection != 0);
+
+		mainMenu();
+
+	}
+	// TERMINA PREVISUALIZADOR DE MAPAS
+
+	// PREPARAR CREACION DE MAPAS
+	public static void prepareMapCreation(){
+
+		System.out.println("====== Entrando a creador de mapas ======");
+		System.out.println("Comenzando creación del nuevo mapa:");
+		System.out.println("De que tamaño desea crearlo?");
+		int rows = askForNumberGZ("Filas? > ");
+		int columns = askForNumberGZ("Columnas? > ");
+		int reqGold = askForNumberGZ("Cantidad de oro necesario para salir? > ");
+		reqGoldList[mapIndex] = reqGold;
+		CustomMap newMap = new CustomMap(rows, columns, reqGold);
+		newMap.FillMap();
+//		maps[mapIndex] = new String[][];
+		mapIndex += 1;
+
+	}
+	// TERMINA PREPARAR CREACION DE MAPAS
+
+
+
+	// FUNCIONES AUXILIARES
+
+	// funcion para pedir numeros dentro de un rango
+	public static int askForNumberL(String message, int lMin, int lMax){
 		int enteredNumber = 0;
 		boolean inputError = false;
 
@@ -208,5 +209,59 @@ public class Main{
 		} while (inputError);
 		return enteredNumber;
 	}
+
+	// funcion para pedir numeros mayor que cero
+	public static int askForNumberGZ(String message){
+		int enteredNumber = 0;
+		boolean inputError = false;
+
+		do {
+			try {
+				System.out.print(message);
+				enteredNumber = input.nextInt();
+
+				if ((enteredNumber > 0)) {
+					inputError = false;
+				} else {
+					inputError = true;
+					System.out.println("El valor ingresado debe ser mayor que cero");
+					System.out.println("Intenta de nuevo");
+				}
+
+			} catch (Exception ex) {
+				inputError = true;
+				System.out.println("El valor ingresado no es valido, intenta de nuevo");
+				input.next();
+
+			}
+
+		} while (inputError);
+		return enteredNumber;
+	}
+
+
+	// funcion para pedir numeros sin limite
+	public static int askForNumberNL(String message){
+		int enteredNumber = 0;
+		boolean inputError = false;
+
+		do {
+			try {
+				System.out.print(message);
+				enteredNumber = input.nextInt();
+				inputError = false;
+
+			} catch (Exception ex) {
+				inputError = true;
+				System.out.println("El valor ingresado no es valido, intenta de nuevo");
+				input.next();
+
+			}
+
+		} while (inputError);
+		return enteredNumber;
+	}
+
+
 
 }
