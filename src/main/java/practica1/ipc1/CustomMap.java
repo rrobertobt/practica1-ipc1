@@ -229,34 +229,63 @@ public class CustomMap {
 		}
 
 		// CASILLAS DE PAREDES
-//		System.out.println("Colocando paredes:");
-//
-//		// Calculamos cuantos espacios estan vacios
-//		int leftSpaces = ((rows*columns) - exitsCount - goldCount);
-//		int goldCount = askForNumberGZ("Cuantas casillas con oro tendra este mapa?");
-//		for (int i = 0; i < goldCount; i++) {
-//			System.out.println("Tomando coordenadas de casillas de oro:");
-//			System.out.println("Donde se colocara la casilla de oro #" + (i + 1) + "?");
-//			int rowGold = 0;
-//			int columnGold = 0;
-//			boolean inputCorrect = false;
-//
-//			do {
-//				rowGold = askForNumber("Fila? > ");
-//				columnGold = askForNumber("Columna? > ");
-//				if(alreadyFilled(generatedMap, rowGold, columnGold)){
-//					System.out.println("Error: esa casilla ya esta llena");
-//				} else { inputCorrect = true; }
-//
-//				generatedMap[rowGold][columnGold] = "G";
-//			} while (!inputCorrect);
-//
-//		}
+		System.out.println("Colocando paredes:");
+
+		// Calculamos cuantos espacios restan donde podemos colocar paredes y espacios vacios
+		int leftSpaces = ((rows*columns) - exitsCount - goldCount);
+		for (int i = 0; i < leftSpaces; i++) {
+			System.out.println("Elige que llenar:");
+			System.out.println("1) Pared");
+			System.out.println("2) Casilla libre");
+
+			int selection = askForNumberL("> ", 1, 2);
+			boolean inputCorrect = false;
+
+			if (selection == 1){
+				do {
+					int rowWallOrSpace = askForNumber("Fila? > ");
+					rowWallOrSpace -= 1;
+					int columnWallOrSpace = askForNumber("Columna? > ");
+					columnWallOrSpace -= 1;
+					if(alreadyFilled(generatedMap, rowWallOrSpace, columnWallOrSpace)){
+						System.out.println("Error: esa casilla ya esta llena");
+					} else { inputCorrect = true; }
+
+					generatedMap[rowWallOrSpace][columnWallOrSpace] = "#";
+				} while (!inputCorrect);
+			} else if (selection == 2) {
+				do {
+					int rowWallOrSpace = askForNumber("Fila? > ");
+					rowWallOrSpace -= 1;
+					int columnWallOrSpace = askForNumber("Columna? > ");
+					columnWallOrSpace -= 1;
+					if(alreadyFilled(generatedMap, rowWallOrSpace, columnWallOrSpace)){
+						System.out.println("Error: esa casilla ya esta llena");
+					} else { inputCorrect = true; }
+
+					generatedMap[rowWallOrSpace][columnWallOrSpace] = "O";
+				} while (!inputCorrect);
+			}
+
+			// mostramos el mapa en su estado actual
+			System.out.println("Mapa actual:");
+			for (int k = 0; k < generatedMap.length; k++) {
+				for (int l = 0; l < generatedMap[k].length; l++) {
+					if (generatedMap[k][l] == null) {
+						generatedMap[k][l] = "-";
+					}
+					System.out.print(generatedMap[k][l]+" ");
+				}
+				System.out.println("");
+			}
+
+		}
+
+		System.out.println("Mapa creado y guardado exitosamente");
 
 		// TERMINA CASILLAS DE PAREDES
 
 	}
-
 
 	// FUNCION PARA COMPROBAR SI YA SE LLENO LA CASILLA QUE SE ESTÁ INTENTANDO LLENAR
 	private boolean alreadyFilled(String[][] mapToVerify, int row, int column){

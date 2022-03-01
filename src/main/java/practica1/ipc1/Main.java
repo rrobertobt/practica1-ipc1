@@ -100,6 +100,8 @@ public class Main{
 			}
 			case 3:
 				System.out.println("====== Mostrando reportes generales ======");
+				System.out.println("!! Parte con reducido funcionamiento !!");
+				showStats();
 				break;
 			case 4:
 				System.out.println("====== Entrando a previsualizador de mapas ======");
@@ -118,7 +120,17 @@ public class Main{
 
 	public static void showStats(){
 
+		System.out.println("** Total de mapas creados **");
 
+		for (int i = 0; i < maps.length; i++) {
+			if (maps[i] != null) {
+				System.out.println(i+1);
+			} else {
+				break;
+			}
+		}
+
+		mainMenu();
 
 	}
 
