@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Practica1IPC1:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Practica1IPC1_jar</output-path>
+    <root id="archive" name="Practica1IPC1.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="Practica1IPC1" />
+    </root>
+  </artifact>
+</component>
